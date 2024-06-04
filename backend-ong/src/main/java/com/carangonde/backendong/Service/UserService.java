@@ -6,19 +6,29 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
-
+@Service
 public class UserService {
     @Autowired
    private UserRepository userRepository;
     @Autowired
-    private ValidatorFactory validatorFactor;
-    public User saveUser( User user){
-        //valid
-        Validator validator = validatorFactor.getValidator();
-        Set<ConstraintValidator<User>> violations = validator.validate(User);
-
+ public User registerUser( User user){
+        if (userRepository.findByEmail(user.getEmail()) != null){
+            throw new RuntimeException("Email ja exitse");
+        }
+        return userRepository.save(user);
+    }
+    public User updateUser (User user){
+        return userRepository.save(user);
+    }
+    public User getUserId (Long id){
+        return userRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("Usuario sem encotar"));
+    }
+    public void deleteUser(Long id){
+        userRepository.deleteById(id);
     }
 
 }
