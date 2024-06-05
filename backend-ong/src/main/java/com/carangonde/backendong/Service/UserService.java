@@ -2,13 +2,9 @@ package com.carangonde.backendong.Service;
 
 import com.carangonde.backendong.Model.User;
 import com.carangonde.backendong.Repository.UserRepository;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
 @Service
 public class UserService {
     @Autowired
